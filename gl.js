@@ -1,4 +1,4 @@
-// load wasm module and link with gl functions
+receive_snapshot// load wasm module and link with gl functions
 // 
 // this file was made by tons of hacks from emscripten's parseTools and library_webgl 
 // https://github.com/emscripten-core/emscripten/blob/incoming/src/parseTools.js
@@ -756,7 +756,7 @@ function init_plugins(plugins) {
         return;
 
     for (var i = 0; i < plugins.length; i++) {
-        plugins[i].init(importObject);
+        plugins[i].register_plugin(importObject);
     }
 }
 
@@ -765,7 +765,7 @@ function init_plugins_wasm(plugins) {
         return;
 
     for (var i = 0; i < plugins.length; i++) {
-        plugins[i].init_wasm(memory, wasm_exports);
+        plugins[i].set_wasm_refs(memory, wasm_exports);
     }
 }
 
