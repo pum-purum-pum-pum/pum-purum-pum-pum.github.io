@@ -760,7 +760,7 @@ function init_plugins(plugins) {
     }
 }
 
-function expose_wasm_plugins(plugins) {
+function expose_wasm(plugins) {
     if (plugins == undefined)
         return;
 
@@ -781,7 +781,7 @@ function load(wasm_path, plugins) {
                 memory = obj.instance.exports.memory;
                 wasm_exports = obj.instance.exports;
 
-                expose_wasm_plugins(plugins);
+                expose_wasm(plugins);
                 obj.instance.exports.main();
             });
     } else {
@@ -792,7 +792,7 @@ function load(wasm_path, plugins) {
                 memory = obj.instance.exports.memory;
                 wasm_exports = obj.instance.exports;
 
-                expose_wasm_plugins(plugins);
+                expose_wasm(plugins);
                 obj.instance.exports.main();
             });
     }
