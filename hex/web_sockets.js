@@ -5,7 +5,7 @@ var exports;
 var socket;
 var is_socket_ready = false;
 // var server_adress = 'wss://echo.websocket.org';
-var server_adress = 'ws://207.154.218.166';
+var server_adress = 'ws://hex_strat.io:9002';
 
 on_init = function () {
     console.log("plugin ok");
