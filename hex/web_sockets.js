@@ -5,7 +5,7 @@ var exports;
 var socket;
 var is_socket_ready = false;
 // var server_adress = 'wss://echo.websocket.org';
-var server_adress = 'wss://hexstrat.fun:9002';
+var server_adress = 'wss://hexstrat.fun/ws';
 
 on_init = function () {
     console.log("plugin ok");
