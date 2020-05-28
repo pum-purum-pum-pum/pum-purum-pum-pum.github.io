@@ -16,8 +16,8 @@ on_init = function () {
     init();
 }
 
-function send_message_buffer(lenght) {
-    var bytes = new Uint8Array(memory.buffer, exports.forward_buffer_ptr(), lenght);
+function send_message_buffer(length) {
+    var bytes = new Uint8Array(memory.buffer, exports.forward_buffer_ptr(), length);
     if (socket.readyState) {
         socket.send(bytes)
         return true;
@@ -47,18 +47,18 @@ init = function () {
 
 
     socket.onmessage = function(event) {
-        let lenght = event.data.size;
+        let length = event.data.size;
         let offset = exports.buffer_ptr();
         event.data.arrayBuffer()
         .then(buffer => {
             console.log("received")
             // if we define bytes earlier in parent scope then everything blows up(don't know (why) Javascript)
-            let bytes = new Uint8Array(memory.buffer, offset, lenght);
-            let data = new Uint8Array(buffer, 0, lenght)
-            for (let i = 0; i < lenght; i++) {
+            let bytes = new Uint8Array(memory.buffer, offset, length);
+            let data = new Uint8Array(buffer, 0, length)
+            for (let i = 0; i < length; i++) {
                 bytes[i] = data[i];
             }
-            exports.receive_msg(lenght)
+            exports.receive_msg(length)
         })
         .catch((error) => {
             console.log(error)
