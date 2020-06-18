@@ -4,10 +4,7 @@ var memory;
 var exports;
 var socket;
 var is_socket_ready = false;
-// var server_adress = 'wss://echo.websocket.org';
-var server_adress = 'wss://hexstrat.fun:9002/ws/';
-// var server_adress = 'ws://127.0.0.1:9002';
-
+var server_adress = 'ws://127.0.0.1:9002';
 
 on_init = function () {
     console.log("plugin ok");
@@ -16,6 +13,7 @@ on_init = function () {
     init();
 }
 
+// called from rust
 function send_message_buffer(length) {
     var bytes = new Uint8Array(memory.buffer, exports.forward_buffer_ptr(), length);
     if (socket.readyState) {
@@ -25,19 +23,8 @@ function send_message_buffer(length) {
     return false;
 }
 
-register_plugin = function (importObject) {
-    console.log("register plugin");
-    importObject.env.ws_init = function () {
-        console.log('js called from rust');
-    }
-    importObject.env.send_message_buffer = send_message_buffer;
-    // importObject.loger
-    console.log(importObject);
-}
-
-miniquad_add_plugin({register_plugin, on_init});
-
-init = function () {
+// used when client press play button (server will connect and search the game)
+function create_ws() {
     // Create WebSocket connection.
     socket = new WebSocket(server_adress);
 
@@ -71,7 +58,24 @@ init = function () {
     };
 
     socket.onerror = function(error) {
-    alert(`[error] ${error.message}`);
+        alert(`[error] ${error.message}`);
     };
+}
+
+register_plugin = function (importObject) {
+    console.log("register plugin");
+    importObject.env.ws_init = function () {
+        console.log('js called from rust');
+    }
+    importObject.env.send_message_buffer = send_message_buffer;
+    importObject.env.create_ws = create_ws;
+
+    // importObject.loger
+    console.log(importObject);
+}
+
+miniquad_add_plugin({register_plugin, on_init});
+
+init = function () {
     console.log("wasm init finish");
 }
