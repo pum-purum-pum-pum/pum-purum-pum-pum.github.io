@@ -1,3 +1,20 @@
+// Safari 13.0.4: Blob.arrayBuffer is not a function 
+(function () {
+    File.prototype.arrayBuffer = File.prototype.arrayBuffer || myArrayBuffer;
+    Blob.prototype.arrayBuffer = Blob.prototype.arrayBuffer || myArrayBuffer;
+  
+    function myArrayBuffer() {
+      // this: File or Blob
+      return new Promise((resolve) => {
+        let fr = new FileReader();
+        fr.onload = () => {
+          resolve(fr.result);
+        };
+        fr.readAsArrayBuffer(this);
+      })
+    }
+  })();
+
 var ctx = null;
 var buffer_size = 0;
 var memory;
