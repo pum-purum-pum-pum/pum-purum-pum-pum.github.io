@@ -59,7 +59,7 @@ function create_ws() {
         console.log(event.data)
         event.data.arrayBuffer()
         .then(buffer => {
-            console.log("received")
+            // console.log("received")
             // if we define bytes earlier in parent scope then everything blows up(don't know (why) Javascript)
             let bytes = new Uint8Array(memory.buffer, offset, length);
             let data = new Uint8Array(buffer, 0, length)
@@ -69,8 +69,8 @@ function create_ws() {
             exports.receive_msg(length)
         })
         .catch((error) => {
-            console.log(error)
-            console.log("you are looser haha")
+            // console.log(error)
+            // console.log("you are looser haha")
         });
     };
 
