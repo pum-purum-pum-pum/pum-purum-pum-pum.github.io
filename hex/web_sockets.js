@@ -56,7 +56,7 @@ function create_ws() {
     socket.onmessage = function(event) {
         let length = event.data.size;
         let offset = exports.buffer_ptr();
-        console.log(event.data)
+        // console.log(event.data)
         event.data.arrayBuffer()
         .then(buffer => {
             // console.log("received")
