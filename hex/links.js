@@ -1,4 +1,3 @@
-// called from rust
 function redirect_twitter() {
     window.open( 
         "https://twitter.com/VladZhukov0", "_blank"); 
