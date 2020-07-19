@@ -21,9 +21,9 @@ var memory;
 var exports;
 var socket;
 var is_socket_ready = false;
+var server_adress = 'ws://127.0.0.1:9002';
 // var server_adress = 'wss://echo.websocket.org';
-var server_adress = 'wss://hexstrat.fun:9002/ws';
-// var server_adress = 'ws://127.0.0.1:9002';
+// var server_adress = 'wss://hexstrat.fun:9002/ws';
 // var server_address = 'ws://192.168.1.39:9002';
 
 on_init = function () {
@@ -90,9 +90,6 @@ register_plugin = function (importObject) {
     }
     importObject.env.send_message_buffer = send_message_buffer;
     importObject.env.create_ws = create_ws;
-
-    // importObject.loger
-    console.log(importObject);
 }
 
 miniquad_add_plugin({register_plugin, on_init});
