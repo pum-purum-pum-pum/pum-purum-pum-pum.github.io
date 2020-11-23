@@ -45,7 +45,7 @@ function acquireInstancedArraysExtension(ctx) {
     }
 }
 
-acquireVertexArrayObjectExtension(gl);
+// acquireVertexArrayObjectExtension(gl);
 acquireInstancedArraysExtension(gl);
 
 // https://developer.mozilla.org/en-US/docs/Web/API/WEBGL_depth_texture
